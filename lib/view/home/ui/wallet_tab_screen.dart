@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import '../../../utility/constants.dart';
 import '../get_controllers/wallet_tab_get_controller.dart';
 
 class WalletTabScreen extends StatelessWidget {
@@ -15,29 +17,31 @@ class WalletTabScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(40.h),
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 1.h,
-                  blurRadius: 5.h,
-                  offset: Offset(0, 1.h),
-                )
+        preferredSize: Size.fromHeight(50.h),
+        child: Container(
+          height: Get.height * 0.1,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                secondaryColor,
+                mainColor,
               ],
+              transform: GradientRotation(-0.2),
             ),
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Wallet",
-                    style:
-                        TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold))
+                SvgPicture.asset("assets/svg/logo.svg"),
               ],
             ),
-          )),
+          ),
+        ),
+      ),
       body: Column(
         children: [
           Padding(
