@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class LegalInformationScreen extends StatefulWidget {
   const LegalInformationScreen({super.key});
@@ -15,18 +16,34 @@ class _LegalInformationScreenState extends State<LegalInformationScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            AppBar(
-              backgroundColor: Colors.white,
-              elevation: 0,
-              centerTitle: true,
-              title: const Text(
-                "Legal",
-                style: TextStyle(
-                    color: Colors.amber,
-                    fontWeight: FontWeight.bold,
-                    decorationStyle: TextDecorationStyle.solid,
-                    decoration: TextDecoration.underline,
-                    decorationColor: Colors.amber),
+            PreferredSize(
+              preferredSize: Size.fromHeight(50.h),
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Get.theme.primaryColor,
+                      Get.theme.secondaryHeaderColor
+                    ],
+                  ),
+                ),
+                child: AppBar(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  centerTitle: true,
+                  title: Text(
+                    "Legal",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      decorationStyle: TextDecorationStyle.solid,
+                      decoration: TextDecoration.underline,
+                      decorationColor: Colors.white,
+                      fontSize: 16.sp,
+                    ),
+                  ),
+                ),
               ),
             ),
             Container(

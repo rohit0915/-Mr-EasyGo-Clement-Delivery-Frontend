@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class SocialBtn extends StatelessWidget {
   final String image;
@@ -21,23 +22,29 @@ class SocialBtn extends StatelessWidget {
           onTap();
         },
         style: ButtonStyle(
-          backgroundColor: const WidgetStatePropertyAll(Colors.white),
+          backgroundColor:
+              WidgetStatePropertyAll(Get.theme.scaffoldBackgroundColor),
+          foregroundColor: WidgetStatePropertyAll(Colors.white),
           shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(
-              side: BorderSide(color: Colors.amber, width: 0.4.w),
+              side: BorderSide(color: Colors.grey, width: 1.w),
               borderRadius: BorderRadius.circular(12),
             ),
           ),
         ),
-        child: Row(
+        child: Stack(
           children: [
-            Image.asset(image, height: 25.h),
-            SizedBox(
-              width: 10.w,
-            ),
-            Text(
-              text,
-              style: TextStyle(fontSize: 14.sp, color: Colors.black),
+            Row(
+              children: [
+                Image.asset(image, height: 25.h),
+                Expanded(
+                  child: Text(
+                    text,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 14.sp),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

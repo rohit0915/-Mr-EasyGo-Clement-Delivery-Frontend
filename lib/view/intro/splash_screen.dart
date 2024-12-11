@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'intro_screen.dart';
-import 'loader_screen.dart';
+import 'package:get/get.dart';
+import 'package:muvit_driver/view/intro/intro_main_screen.dart';
+import 'package:muvit_driver/view/intro/loader_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,29 +11,28 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  bool isLoadingScreen = false;
-
+  RxBool isLoadingScreen = false.obs;
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
-      isLoadingScreen = true;
-      setState(() {});
+    Future.delayed(Duration.zero, () {
+      isLoadingScreen.value = true;
       Future.delayed(const Duration(seconds: 3), () {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const IntroScreen()));
+        Get.offAll(() => IntroMainScreen());
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return isLoadingScreen
-        ? const LoaderScreen()
-        : Scaffold(
-            body: Center(
-              child: Image.asset("assets/images/splash.png"),
-            ),
-          );
+    return Obx(() {
+      return isLoadingScreen.value
+          ? const LoaderScreen()
+          : Scaffold(
+              body: Center(
+                child: Image.asset("assets/images/easy_go_mini_logo.png"),
+              ),
+            );
+    });
   }
 }

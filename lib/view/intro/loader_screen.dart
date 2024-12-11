@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoaderScreen extends StatefulWidget {
   const LoaderScreen({super.key});
@@ -39,41 +38,16 @@ class _LoaderScreenState extends State<LoaderScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          children: [
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: const BoxDecoration(color: Color(0xffFABC05)),
-            ),
-            Center(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Loading ...",
-                  style: TextStyle(color: Colors.black, fontSize: 20.sp),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                // Set Rotation Animation
-
-                AnimatedBuilder(
-                    animation: animationController,
-                    child: Image.asset("assets/images/loading_icon.png"),
-                    builder: (BuildContext context, Widget? child) {
-                      return Transform.rotate(
-                        angle: animationController.value * 3.14 * 2,
-                        child: child,
-                      );
-                    }),
-
-                // Set Scale Animation
-              ],
-            )),
-          ],
-        ),
+        child: Center(
+            child: AnimatedBuilder(
+                animation: animationController,
+                child: Image.asset("assets/images/easy_go_mini_logo.png"),
+                builder: (BuildContext context, Widget? child) {
+                  return Transform.rotate(
+                    angle: animationController.value * 3.14 * 2,
+                    child: child,
+                  );
+                })),
       ),
     );
   }
