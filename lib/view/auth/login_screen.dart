@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:muvit_driver/view/auth/otp_verification_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../components/first_btn.dart';
 import '../../components/social_btn.dart';
 import '../intro/get_controllers/login_screen_get_controller.dart';
-import 'otp_screen.dart';
 import 'reset_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -249,7 +249,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             if (!getController.isOtp.value) {
                               getController.isOtp.value = true;
                             } else {
-                              Get.to(() => const OtpScreen());
+                              Get.to(() => const OtpVerificationScreen(
+                                    isForgetPassword: false,
+                                    isSignUp: false,
+                                  ));
                             }
                           });
                     }),

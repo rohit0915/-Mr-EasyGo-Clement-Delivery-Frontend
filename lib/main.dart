@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:muvit_driver/controller/home_controller.dart';
 import 'package:muvit_driver/view/intro/splash_screen.dart';
 
+import 'view/home/tab_screen.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Get.lazyPut(() => HomeController(), fenix: true);
@@ -16,12 +18,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //status bar color
-
     return ScreenUtilInit(
       minTextAdapt: true,
       builder: (context, child) {
-        //status bar color
         SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
           statusBarColor: Color(0xff292e55),
           statusBarIconBrightness: Brightness.light,
@@ -84,10 +83,7 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home: const SplashScreen(),
-          // home: DeleteThisAccount1Screen(),
-          // home: const TopUpScreen(),
-          // home: const ReceiptScreen(),
+          home: SplashScreen(),
         );
       },
     );

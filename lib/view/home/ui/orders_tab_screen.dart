@@ -1,70 +1,82 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:muvit_driver/controller/home_controller.dart';
 import 'package:muvit_driver/view/home/ui/completed_orders_tab_screen.dart';
 import 'package:muvit_driver/view/home/ui/pending_orders_tab_screen.dart';
 import 'package:muvit_driver/view/home/ui/running_orders_tab_screen.dart';
 
-import '../../../utility/constants.dart';
-import '../get_controllers/orders_tab_get_controller.dart';
+import '../../notification/notification_screen.dart';
 
-class OrdersTabScreen extends StatelessWidget {
-  OrdersTabScreen({super.key});
+class OrdersTabScreen extends StatefulWidget {
+  const OrdersTabScreen({super.key});
 
-  final OrdersTabGetController getController =
-      Get.put(OrdersTabGetController());
+  @override
+  State<OrdersTabScreen> createState() => _OrdersTabScreenState();
+}
+
+class _OrdersTabScreenState extends State<OrdersTabScreen> {
+  HomeController homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: 3,
         child: Scaffold(
-            appBar: PreferredSize(
-              preferredSize: Size.fromHeight(50.h),
-              child: Container(
-                height: Get.height * 0.1,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      secondaryColor,
-                      mainColor,
-                    ],
-                    transform: GradientRotation(-0.2),
-                  ),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset("assets/svg/logo.svg"),
-                    ],
+            appBar: AppBar(
+              leading: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                child: GestureDetector(
+                  onTap: () {
+                    homeController.scaffoldKey.value.currentState!.openDrawer();
+                  },
+                  child: Image.asset(
+                    "assets/images/drawer_menu.png",
+                    width: 20.h,
                   ),
                 ),
               ),
+              title: Text("My Orders",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.bold,
+                  )),
+              centerTitle: true,
+              actions: [
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => const NotificationScreen());
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 10.w),
+                    child: Image.asset(
+                      "assets/images/notification_bell_icon.png",
+                      height: 20.h,
+                    ),
+                  ),
+                )
+              ],
             ),
             body: Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: TabBar(
-                      indicatorWeight: 3.h,
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      tabs: [
-                        Tab(
-                          text: "Pending",
-                        ),
-                        Tab(
-                          text: "Running",
-                        ),
-                        Tab(
-                          text: "Completed",
-                        ),
-                      ]),
-                ),
+                TabBar(
+                    labelColor: Colors.white,
+                    indicatorColor: Colors.white,
+                    unselectedLabelColor: Color(0xff76787E),
+                    indicatorWeight: 3.h,
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    tabs: [
+                      Tab(
+                        text: "Pending",
+                      ),
+                      Tab(
+                        text: "Running Orders",
+                      ),
+                      Tab(
+                        text: "Completed",
+                      ),
+                    ]),
                 Expanded(
                   child: TabBarView(children: [
                     PendingOrdersTabScreen(),

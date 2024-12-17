@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:muvit_driver/components/my_bottom_bar_widget.dart';
 import 'package:muvit_driver/view/home/home_screen.dart';
+import 'package:muvit_driver/view/home/ui/map_screen.dart';
 import 'package:muvit_driver/view/home/ui/orders_tab_screen.dart';
 import 'package:muvit_driver/view/home/ui/wallet_tab_screen.dart';
 
@@ -23,8 +24,9 @@ class _TabScreenState extends State<TabScreen> {
   final List<Widget> _list = [
     const HomeScreen(),
     OrdersTabScreen(),
+    const MapScreen(),
     WalletTabScreen(),
-    const HomeProfileScreen()
+    const HomePageScreen()
   ];
   @override
   void initState() {

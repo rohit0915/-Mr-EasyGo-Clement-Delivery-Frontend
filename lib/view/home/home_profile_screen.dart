@@ -1,170 +1,444 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:muvit_driver/components/custom_app_bar.dart';
-import 'package:muvit_driver/controller/home_controller.dart';
-import 'package:muvit_driver/view/kyc/upload_document_screen.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:muvit_driver/profile/contact_us_screen.dart';
+import 'package:muvit_driver/profile/privacy_policy_screen.dart';
+import 'package:muvit_driver/view/delete/delete_this_account_1_screen.dart';
+import 'package:share_plus/share_plus.dart';
 
-import '../../components/custom_textfield.dart';
+import '../../profile/about_us_screen.dart';
+import '../../profile/terms_and_conditions_screen.dart';
+import '../dialog/logout_alert_dialog.dart';
+import 'address_list_screen.dart';
+import 'change_login_screen.dart';
+import 'ui/care_call_screen.dart';
+import 'ui/edit_profile_screen.dart';
 
-class HomeProfileScreen extends StatefulWidget {
-  const HomeProfileScreen({super.key});
+class HomePageScreen extends StatefulWidget {
+  const HomePageScreen({super.key});
 
   @override
-  State<HomeProfileScreen> createState() => _HomeProfileScreenState();
+  State<HomePageScreen> createState() => _HomePageScreenState();
 }
 
-class _HomeProfileScreenState extends State<HomeProfileScreen> {
-  String isActive = "Active";
-  HomeController homeController = Get.find();
+class _HomePageScreenState extends State<HomePageScreen> {
+  bool isShowCopyView = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            CustomAppBar(
-                title: "Profile",
-                onTap: () {
-                  homeController.currentIndex.value = 0;
-                }),
-            SizedBox(
-              height: 20.h,
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 20.h),
-              child: Column(
+      appBar: AppBar(
+        title: Text("My Profile",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20.sp,
+              fontWeight: FontWeight.bold,
+            )),
+        centerTitle: true,
+      ),
+      body: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+        children: [
+          Row(
+            children: [
+              CircleAvatar(
+                backgroundImage:
+                    const AssetImage("assets/images/shareya_joseph.png"),
+                radius: 40.r,
+              ),
+              SizedBox(width: 20.w),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Stack(
+                  Row(
                     children: [
-                      Container(
-                        height: 90.h,
-                        width: 90.h,
-                        decoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(100)),
-                          border: Border.all(color: Colors.white, width: 2),
-                          image: const DecorationImage(
-                            image: AssetImage("assets/images/user.jpg"),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: Container(
-                            height: 30.h,
-                            width: 30.h,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                            ),
-                            child: Image.asset("assets/images/edit_icon.png")),
+                      Text("Kushal",
+                          style: TextStyle(
+                              fontSize: 20.sp, fontWeight: FontWeight.bold)),
+                      SizedBox(width: 10.w),
+                      const Icon(
+                        Icons.check_circle,
+                        color: Colors.green,
                       )
                     ],
                   ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(
-                      isActive == "Active"
-                          ? Colors.green
-                          : isActive == "Inactive"
-                              ? Colors.red
-                              : Colors.amber,
-                    )),
-                    onPressed: () {
-                      if (isActive == "Active") {
-                        isActive = "Inactive";
-                      } else if (isActive == "Inactive") {
-                        isActive = "Break";
-                      } else {
-                        isActive = "Active";
-                      }
-                      setState(() {});
-                    },
-                    child: Text(
-                      isActive,
-                      style: const TextStyle(color: Colors.white),
+                  Text(
+                    "+91 9876543210",
+                    style: TextStyle(
+                      fontSize: 12.sp,
                     ),
                   ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Text(
-                    "John Deo",
-                    style:
-                        TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  const CustomTextfield(
-                      title: "Plate Number",
-                      hintText: "eg AB 12XY 0000",
-                      keyboardType: TextInputType.number,
-                      isEdit: true),
-                  const CustomTextfield(
-                      title: "Mobile Number",
-                      hintText: "+1 (000) 0000-000",
-                      keyboardType: TextInputType.number,
-                      isEdit: true),
-                  const CustomTextfield(
-                      title: "Vehicle Type",
-                      hintText: "Type",
-                      keyboardType: TextInputType.number,
-                      isEdit: true),
-                  const CustomTextfield(
-                      title: "Email",
-                      hintText: "Email",
-                      isEdit: true),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Personal Documents",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 13.h),
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => const EditProfileScreen());
+                    },
+                    child: Text(
+                      "View Details",
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: Colors.white,
+                        decoration: TextDecoration.underline,
                       ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+          SizedBox(height: 20.h),
+          Text("Refer & Earn",
+              style: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.bold)),
+          Text("Up to \$2000 for each referral",
+              style: TextStyle(fontSize: 13.sp)),
+          SizedBox(height: 20.h),
+          Container(
+            decoration: BoxDecoration(
+              color: isShowCopyView ? Colors.white : null,
+              gradient: isShowCopyView
+                  ? null
+                  : const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      transform: GradientRotation(-0.3),
+                      colors: [Color(0xff383A61), Color(0xff5B6482)],
+                    ),
+              borderRadius: BorderRadius.circular(20.r),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+            child: isShowCopyView
+                ? Row(
+                    children: [
+                      Image.asset(
+                        "assets/images/tick_icon.png",
+                        height: 20.h,
+                      ),
+                      SizedBox(
+                        width: 20.w,
+                      ),
+                      Text(
+                        "Link Copied",
+                        style: TextStyle(
+                            fontSize: 14.sp,
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  )
+                : Row(
+                    children: [
+                      Expanded(
+                        child: Text("XYUTYXG",
+                            style: TextStyle(
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
+                      SizedBox(width: 10.w),
+                      Icon(
+                        Icons.copy,
+                        color: Colors.blue,
+                        size: 15.sp,
+                      ),
+                      SizedBox(width: 10.w),
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => const UploadDocumentScreen());
+                          setState(() {
+                            isShowCopyView = true;
+                          });
+                          Timer(const Duration(seconds: 2), () {
+                            setState(() {
+                              isShowCopyView = false;
+                            });
+                          });
                         },
-                        child: Container(
-                          width: Get.width * 0.9,
-                          padding: EdgeInsets.all(10.h),
-                          margin: EdgeInsets.symmetric(vertical: 10.h),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.grey,
-                              width: 0.5.w,
-                            ),
-                            borderRadius: BorderRadius.circular(10.r),
-                          ),
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Vehicle RC, Driver’s License"),
-                              Icon(Icons.arrow_forward_ios)
-                            ],
-                          ),
-                        ),
+                        child: Text("Copy".toUpperCase(),
+                            style: TextStyle(
+                                fontSize: 12.sp,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 20.h,
+          ),
+          SizedBox(height: 10.h),
+          Table(
+            columnWidths: const {
+              0: FlexColumnWidth(10), // Flexible column
+              1: FlexColumnWidth(1), // Spacing column
+              2: FlexColumnWidth(10), // Flexible column
+            },
+            children: [
+              TableRow(children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => const AddressListScreen());
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        transform: GradientRotation(-0.3),
+                        colors: [Color(0xff383A61), Color(0xff5B6482)],
+                      ),
+                      borderRadius: BorderRadius.circular(50.r),
+                      border: Border.all(color: Colors.black.withOpacity(0.5)),
+                    ),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                    child: Text(
+                      "EDIT or ADD Address",
+                      style: TextStyle(
+                        fontSize: 11.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                ],
-              ),
-            )
-          ],
-        ),
+                ),
+                SizedBox(
+                    width: 10.w), // Replace Spacer with SizedBox for spacing
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => const ChangeLoginScreen());
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        transform: GradientRotation(-0.3),
+                        colors: [Color(0xff383A61), Color(0xff5B6482)],
+                      ),
+                      borderRadius: BorderRadius.circular(50.r),
+                      border: Border.all(color: Colors.black.withOpacity(0.5)),
+                    ),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                    child: Text(
+                      "CHANGE PASSWORD",
+                      style: TextStyle(
+                        fontSize: 11.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ]),
+              TableRow(children: [
+                SizedBox(height: 10.h),
+                SizedBox(height: 10.h),
+                SizedBox(height: 10.h),
+              ]),
+              TableRow(children: [
+                GestureDetector(
+                  onTap: () {
+                    Share.share('Testing');
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        transform: GradientRotation(-0.3),
+                        colors: [Color(0xff383A61), Color(0xff5B6482)],
+                      ),
+                      borderRadius: BorderRadius.circular(50.r),
+                      border: Border.all(color: Colors.black.withOpacity(0.5)),
+                    ),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Share on",
+                          style: TextStyle(
+                            fontSize: 11.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(width: 10.w),
+                        Icon(
+                          MdiIcons.whatsapp,
+                          color: Colors.green,
+                          size: 14.sp,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                    width: 10.w), // Replace Spacer with SizedBox for spacing
+                GestureDetector(
+                  onTap: () {
+                    Share.share('Testing');
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        transform: GradientRotation(-0.3),
+                        colors: [Color(0xff383A61), Color(0xff5B6482)],
+                      ),
+                      borderRadius: BorderRadius.circular(50.r),
+                      border: Border.all(color: Colors.black.withOpacity(0.5)),
+                    ),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Share on",
+                          style: TextStyle(
+                            fontSize: 11.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(width: 10.w),
+                        Icon(
+                          MdiIcons.share,
+                          size: 14.sp,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ]),
+              TableRow(children: [
+                SizedBox(height: 10.h),
+                SizedBox(height: 10.h),
+                SizedBox(height: 10.h),
+              ]),
+              TableRow(children: [
+                SizedBox(
+                  height: 40.h,
+                  child: Center(
+                    child: Text(
+                      "For any queries or help",
+                      style: TextStyle(
+                        fontSize: 11.sp,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                    width: 10.w), // Replace Spacer with SizedBox for spacing
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => const CareCallScreen());
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        transform: GradientRotation(-0.3),
+                        colors: [Color(0xff383A61), Color(0xff5B6482)],
+                      ),
+                      borderRadius: BorderRadius.circular(50.r),
+                      border: Border.all(color: Colors.black.withOpacity(0.5)),
+                    ),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                    child: Text(
+                      "CALL US",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 11.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ]),
+              TableRow(children: [
+                SizedBox(height: 10.h),
+                SizedBox(height: 10.h),
+                SizedBox(height: 10.h),
+              ]),
+            ],
+          ),
+
+          SizedBox(height: 20.h),
+          const Divider(
+            color: Colors.blue,
+          ),
+          SizedBox(height: 20.h),
+          //about us, terms and conditions, privacy policy, contact us, delete this account
+          GestureDetector(
+              onTap: () {
+                Get.to(() => AboutUsScreen());
+              },
+              child: const Text("ABOUT US")),
+          SizedBox(height: 10.h),
+          GestureDetector(
+              onTap: () {
+                Get.to(() => TermsAndConditionsScreen());
+              },
+              child: const Text("TERMS & CONDITIONS")),
+          SizedBox(height: 10.h),
+          GestureDetector(
+              onTap: () {
+                Get.to(() => PrivacyPolicyScreen());
+              },
+              child: const Text("PRIVACY POLICY")),
+          SizedBox(height: 10.h),
+          GestureDetector(
+              onTap: () {
+                Get.to(() => ContactUsScreen());
+              },
+              child: const Text("CONTACT US")),
+          SizedBox(height: 10.h),
+          GestureDetector(
+              onTap: () {
+                Get.to(() => DeleteThisAccount1Screen());
+              },
+              child: const Text("DELETE THIS ACCOUNT")),
+          SizedBox(height: 20.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => const LogoutAlertDialog());
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.red.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(5.r),
+                    border: Border.all(color: Colors.red, width: 2.w),
+                  ),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
+                  child: Row(
+                    children: [
+                      Icon(
+                        MdiIcons.logout,
+                        color: Colors.red,
+                      ),
+                      SizedBox(width: 10.w),
+                      Text(
+                        "LOGOUT",
+                        style: TextStyle(
+                            color: Colors.red,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          )
+        ],
       ),
-    ));
+    );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:muvit_driver/view/auth/otp_screen.dart';
+import 'package:muvit_driver/view/auth/otp_verification_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../components/first_btn.dart';
@@ -257,7 +257,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           if (!await Permission.location.isGranted) {
                             await Permission.location.request();
                           }
-                          Get.to(() => OtpScreen());
+                          Get.to(() => OtpVerificationScreen(
+                                isForgetPassword: false,
+                                isSignUp: true,
+                              ));
                         }),
                   ),
                 ),

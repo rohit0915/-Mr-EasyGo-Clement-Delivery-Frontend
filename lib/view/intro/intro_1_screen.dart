@@ -24,7 +24,7 @@ class Intro1Screen extends StatelessWidget {
                   fit: BoxFit.contain,
                 )),
             Positioned.fromRelativeRect(
-                rect: RelativeRect.fromLTRB(0, 10.h, 0, 0),
+                rect: RelativeRect.fromLTRB(0, -60.h, 0, 0),
                 child: Image.asset("assets/images/image 1.png")),
             Positioned.fromRelativeRect(
               rect: RelativeRect.fromLTRB(0, 450.h, 0, 120.h),

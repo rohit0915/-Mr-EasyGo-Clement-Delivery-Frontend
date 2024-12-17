@@ -1,55 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:muvit_driver/utility/constants.dart';
 
-import '../../../utility/constants.dart';
-import '../get_controllers/wallet_tab_get_controller.dart';
+import '../../../controller/home_controller.dart';
 
-class WalletTabScreen extends StatelessWidget {
-  WalletTabScreen({super.key});
+class WalletTabScreen extends StatefulWidget {
+  const WalletTabScreen({super.key});
 
-  final WalletTabGetController getController =
-      Get.put(WalletTabGetController());
+  @override
+  State<WalletTabScreen> createState() => _WalletTabScreenState();
+}
+
+class _WalletTabScreenState extends State<WalletTabScreen> {
+  HomeController homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50.h),
-        child: Container(
-          height: Get.height * 0.1,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                secondaryColor,
-                mainColor,
-              ],
-              transform: GradientRotation(-0.2),
-            ),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.h),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset("assets/svg/logo.svg"),
-              ],
-            ),
-          ),
-        ),
+      appBar: AppBar(
+        title: Text("My Wallet",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20.sp,
+              fontWeight: FontWeight.bold,
+            )),
+        centerTitle: true,
       ),
       body: Column(
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
             child: Card(
-              color: Colors.white,
               elevation: 7.h,
-              child: Padding(
+              child: Container(
+                decoration: cardDecoration,
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                 child: Column(
                   children: [
@@ -70,25 +56,18 @@ class WalletTabScreen extends StatelessWidget {
                       children: [
                         RichText(
                           text: TextSpan(
-                            text: "₹",
+                            text: "\$",
                             style: TextStyle(
                                 fontSize: 20.sp,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.green.shade700),
+                                color: Colors.white),
                             children: [
                               TextSpan(
-                                text: "14,500",
+                                text: "1000",
                                 style: TextStyle(
                                     fontSize: 24.sp,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.green.shade700),
-                              ),
-                              TextSpan(
-                                text: ".00",
-                                style: TextStyle(
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.green.shade700),
+                                    color: Colors.white),
                               ),
                             ],
                           ),
@@ -102,21 +81,22 @@ class WalletTabScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Column(
-                          children: [Icon(MdiIcons.upload), Text("Top Up")],
-                        ),
-                        SizedBox(
-                          width: 20.w,
-                        ),
-                        Container(
-                          height: 30.h,
-                          width: 1.w,
-                          color: Colors.grey,
-                        ),
-                        SizedBox(
-                          width: 20.w,
-                        ),
-                        Column(
-                          children: [Icon(MdiIcons.download), Text("Redeem")],
+                          children: [
+                            Icon(
+                              MdiIcons.download,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            Text(
+                              "Withdraw",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
                         )
                       ],
                     )
@@ -125,20 +105,11 @@ class WalletTabScreen extends StatelessWidget {
               ),
             ),
           ),
-          Spacer(),
           Container(
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(25), topRight: Radius.circular(25)),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5.h,
-                  blurRadius: 7.h,
-                  offset: const Offset(0, 3), // changes position of shadow
-                ),
-              ],
+            decoration: cardDecoration.copyWith(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20.r),
+                  topRight: Radius.circular(20.r)),
             ),
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
@@ -155,139 +126,40 @@ class WalletTabScreen extends StatelessWidget {
                   SizedBox(
                     height: 10.h,
                   ),
-                  Table(
-                    columnWidths: {
-                      0: FlexColumnWidth(1),
-                      1: FlexColumnWidth(3),
-                      2: FlexColumnWidth(2)
-                    },
-                    children: [
-                      TableRow(children: [
-                        Padding(
-                          padding: EdgeInsets.only(right: 10.h),
-                          child: Image.asset(
-                            "assets/images/user.jpg",
-                            height: 50.h,
-                          ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "John Doe",
-                              style: TextStyle(
-                                  fontSize: 16.sp, fontWeight: FontWeight.bold),
+                  SizedBox(
+                    height: 70.h * 5,
+                    width: Get.width,
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            leading: Image.asset(
+                              "assets/images/easy_go_logo.png",
+                              color: Colors.blue,
+                              width: 50.w,
                             ),
-                            Text(
-                              "30 Sept 2021 | 10:30 AM",
-                              style: TextStyle(fontSize: 10.sp),
-                            )
-                          ],
-                        ),
-                        Text("₹ 500.00",
-                            style: TextStyle(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.green.shade700))
-                      ]),
-                      TableRow(children: [
-                        SizedBox(height: 10.h,),
-                        SizedBox(height: 10.h,),
-                        SizedBox(height: 10.h,),
-                      ]),
-                      TableRow(children: [
-                        Padding(
-                          padding: EdgeInsets.only(right: 10.h),
-                          child: Image.asset(
-                            "assets/images/user.jpg",
-                            height: 50.h,
-                          ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "John Doe",
+                            title: Text(
+                              "Amount Received",
                               style: TextStyle(
-                                  fontSize: 16.sp, fontWeight: FontWeight.bold),
+                                  fontSize: 15.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
                             ),
-                            Text(
-                              "30 Sept 2021 | 10:30 AM",
-                              style: TextStyle(fontSize: 10.sp),
-                            )
-                          ],
-                        ),
-                        Text("₹ 500.00",
-                            style: TextStyle(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.red.shade700))
-                      ]),TableRow(children: [
-                        SizedBox(height: 10.h,),
-                        SizedBox(height: 10.h,),
-                        SizedBox(height: 10.h,),
-                      ]),
-                      TableRow(children: [
-                        Padding(
-                          padding: EdgeInsets.only(right: 10.h),
-                          child: Image.asset(
-                            "assets/images/user.jpg",
-                            height: 50.h,
-                          ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "John Doe",
+                            subtitle: Text(
+                              "30 Sep 2024 | 12:50 pm",
                               style: TextStyle(
-                                  fontSize: 16.sp, fontWeight: FontWeight.bold),
+                                  fontSize: 12.sp, color: Colors.grey.shade400),
                             ),
-                            Text(
-                              "30 Sept 2021 | 10:30 AM",
-                              style: TextStyle(fontSize: 10.sp),
-                            )
-                          ],
-                        ),
-                        Text("₹ 500.00",
-                            style: TextStyle(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.green.shade700))
-                      ]),TableRow(children: [
-                        SizedBox(height: 10.h,),
-                        SizedBox(height: 10.h,),
-                        SizedBox(height: 10.h,),
-                      ]),
-                      TableRow(children: [
-                        Padding(
-                          padding: EdgeInsets.only(right: 10.h),
-                          child: Image.asset(
-                            "assets/images/user.jpg",
-                            height: 50.h,
-                          ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "John Doe",
+                            trailing: Text(
+                              "\$ 500",
                               style: TextStyle(
-                                  fontSize: 16.sp, fontWeight: FontWeight.bold),
+                                  fontSize: 15.sp,
+                                  color: Color(0xff00E917),
+                                  fontWeight: FontWeight.bold),
                             ),
-                            Text(
-                              "30 Sept 2021 | 10:30 AM",
-                              style: TextStyle(fontSize: 10.sp),
-                            )
-                          ],
-                        ),
-                        Text("₹ 500.00",
-                            style: TextStyle(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.red.shade700))
-                      ]),
-                    ],
+                          );
+                        }),
                   )
                 ],
               ),
