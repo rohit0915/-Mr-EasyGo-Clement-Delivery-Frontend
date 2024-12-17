@@ -209,8 +209,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                           ),
                         ),
                         onPressed: () {
-                          Get.to(
-                              () => const ChatScreen(title: "Chat With Owner"));
+                          Get.to(() => const ChatScreen());
                         },
                         label: Text(
                           "WhatsApp".toUpperCase(),
@@ -224,8 +223,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                           ),
                         ),
                         onPressed: () {
-                          Get.to(
-                              () => const ChatScreen(title: "Chat With Owner"));
+                          Get.to(() => const ChatScreen());
                         },
                         label: Text(
                           "Message".toUpperCase(),

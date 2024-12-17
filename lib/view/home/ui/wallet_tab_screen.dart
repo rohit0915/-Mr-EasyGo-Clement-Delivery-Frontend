@@ -127,7 +127,7 @@ class _WalletTabScreenState extends State<WalletTabScreen> {
                     height: 10.h,
                   ),
                   SizedBox(
-                    height: 70.h * 5,
+                    height: 69.h * 5,
                     width: Get.width,
                     child: ListView.builder(
                         shrinkWrap: true,

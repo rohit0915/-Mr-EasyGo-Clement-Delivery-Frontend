@@ -4,14 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:muvit_driver/profile/about_us_screen.dart';
 import 'package:muvit_driver/profile/contact_us_screen.dart';
 import 'package:muvit_driver/profile/privacy_policy_screen.dart';
+import 'package:muvit_driver/profile/terms_and_conditions_screen.dart';
+import 'package:muvit_driver/view/chat/chat_screen.dart';
 import 'package:muvit_driver/view/delete/delete_this_account_1_screen.dart';
+import 'package:muvit_driver/view/dialog/logout_alert_dialog.dart';
+import 'package:muvit_driver/view/profile/vehicle_detail_screen.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../../profile/about_us_screen.dart';
-import '../../profile/terms_and_conditions_screen.dart';
-import '../dialog/logout_alert_dialog.dart';
+import '../profile/document_screen.dart';
 import 'address_list_screen.dart';
 import 'change_login_screen.dart';
 import 'ui/care_call_screen.dart';
@@ -164,212 +167,317 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   ),
           ),
           SizedBox(height: 10.h),
-          Table(
-            columnWidths: const {
-              0: FlexColumnWidth(10), // Flexible column
-              1: FlexColumnWidth(1), // Spacing column
-              2: FlexColumnWidth(10), // Flexible column
-            },
+          Column(
             children: [
-              TableRow(children: [
-                GestureDetector(
-                  onTap: () {
-                    Get.to(() => const AddressListScreen());
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        transform: GradientRotation(-0.3),
-                        colors: [Color(0xff383A61), Color(0xff5B6482)],
-                      ),
-                      borderRadius: BorderRadius.circular(50.r),
-                      border: Border.all(color: Colors.black.withOpacity(0.5)),
-                    ),
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                    child: Text(
-                      "EDIT or ADD Address",
-                      style: TextStyle(
-                        fontSize: 11.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                    width: 10.w), // Replace Spacer with SizedBox for spacing
-                GestureDetector(
-                  onTap: () {
-                    Get.to(() => const ChangeLoginScreen());
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        transform: GradientRotation(-0.3),
-                        colors: [Color(0xff383A61), Color(0xff5B6482)],
-                      ),
-                      borderRadius: BorderRadius.circular(50.r),
-                      border: Border.all(color: Colors.black.withOpacity(0.5)),
-                    ),
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                    child: Text(
-                      "CHANGE PASSWORD",
-                      style: TextStyle(
-                        fontSize: 11.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ]),
-              TableRow(children: [
-                SizedBox(height: 10.h),
-                SizedBox(height: 10.h),
-                SizedBox(height: 10.h),
-              ]),
-              TableRow(children: [
-                GestureDetector(
-                  onTap: () {
-                    Share.share('Testing');
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        transform: GradientRotation(-0.3),
-                        colors: [Color(0xff383A61), Color(0xff5B6482)],
-                      ),
-                      borderRadius: BorderRadius.circular(50.r),
-                      border: Border.all(color: Colors.black.withOpacity(0.5)),
-                    ),
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Share on",
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => const AddressListScreen());
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            transform: GradientRotation(-0.3),
+                            colors: [Color(0xff383A61), Color(0xff5B6482)],
+                          ),
+                          borderRadius: BorderRadius.circular(50.r),
+                          border:
+                              Border.all(color: Colors.black.withOpacity(0.5)),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.w, vertical: 10.h),
+                        child: Text(
+                          "EDIT or ADD Address",
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 11.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(width: 10.w),
-                        Icon(
-                          MdiIcons.whatsapp,
-                          color: Colors.green,
-                          size: 14.sp,
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                    width: 10.w), // Replace Spacer with SizedBox for spacing
-                GestureDetector(
-                  onTap: () {
-                    Share.share('Testing');
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        transform: GradientRotation(-0.3),
-                        colors: [Color(0xff383A61), Color(0xff5B6482)],
-                      ),
-                      borderRadius: BorderRadius.circular(50.r),
-                      border: Border.all(color: Colors.black.withOpacity(0.5)),
-                    ),
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Share on",
+                  SizedBox(
+                      width: 10.w), // Replace Spacer with SizedBox for spacing
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => const ChangeLoginScreen());
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            transform: GradientRotation(-0.3),
+                            colors: [Color(0xff383A61), Color(0xff5B6482)],
+                          ),
+                          borderRadius: BorderRadius.circular(50.r),
+                          border:
+                              Border.all(color: Colors.black.withOpacity(0.5)),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.w, vertical: 10.h),
+                        child: Text(
+                          "CHANGE PASSWORD",
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 11.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(width: 10.w),
-                        Icon(
-                          MdiIcons.share,
-                          size: 14.sp,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => const VehicleDetailScreen());
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            transform: GradientRotation(-0.3),
+                            colors: [Color(0xff383A61), Color(0xff5B6482)],
+                          ),
+                          borderRadius: BorderRadius.circular(50.r),
+                          border:
+                              Border.all(color: Colors.black.withOpacity(0.5)),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-              ]),
-              TableRow(children: [
-                SizedBox(height: 10.h),
-                SizedBox(height: 10.h),
-                SizedBox(height: 10.h),
-              ]),
-              TableRow(children: [
-                SizedBox(
-                  height: 40.h,
-                  child: Center(
-                    child: Text(
-                      "For any queries or help",
-                      style: TextStyle(
-                        fontSize: 11.sp,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.w, vertical: 10.h),
+                        child: Text(
+                          "VEHICLE DETAIL",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 11.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                    width: 10.w), // Replace Spacer with SizedBox for spacing
-                GestureDetector(
-                  onTap: () {
-                    Get.to(() => const CareCallScreen());
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        transform: GradientRotation(-0.3),
-                        colors: [Color(0xff383A61), Color(0xff5B6482)],
-                      ),
-                      borderRadius: BorderRadius.circular(50.r),
-                      border: Border.all(color: Colors.black.withOpacity(0.5)),
-                    ),
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                    child: Text(
-                      "CALL US",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 11.sp,
-                        fontWeight: FontWeight.bold,
+                  SizedBox(
+                      width: 10.w), // Replace Spacer with SizedBox for spacing
+
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => const DocumentScreen());
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            transform: GradientRotation(-0.3),
+                            colors: [Color(0xff383A61), Color(0xff5B6482)],
+                          ),
+                          borderRadius: BorderRadius.circular(50.r),
+                          border:
+                              Border.all(color: Colors.black.withOpacity(0.5)),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.w, vertical: 10.h),
+                        child: Text(
+                          "DOCUMENTS",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 11.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ]),
-              TableRow(children: [
-                SizedBox(height: 10.h),
-                SizedBox(height: 10.h),
-                SizedBox(height: 10.h),
-              ]),
+                ],
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        Share.share("Testing");
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            transform: GradientRotation(-0.3),
+                            colors: [Color(0xff383A61), Color(0xff5B6482)],
+                          ),
+                          borderRadius: BorderRadius.circular(50.r),
+                          border:
+                              Border.all(color: Colors.black.withOpacity(0.5)),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.w, vertical: 10.h),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Share on".toUpperCase(),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 11.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(width: 10.w),
+                            Icon(
+                              MdiIcons.whatsapp,
+                              color: Colors.green,
+                              size: 14.sp,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                      width: 10.w), // Replace Spacer with SizedBox for spacing
+
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        Share.share("Testing");
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            transform: GradientRotation(-0.3),
+                            colors: [Color(0xff383A61), Color(0xff5B6482)],
+                          ),
+                          borderRadius: BorderRadius.circular(50.r),
+                          border:
+                              Border.all(color: Colors.black.withOpacity(0.5)),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.w, vertical: 10.h),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Share on".toUpperCase(),
+                              style: TextStyle(
+                                fontSize: 11.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(width: 10.w),
+                            Icon(
+                              MdiIcons.share,
+                              size: 14.sp,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => const ChatScreen());
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            transform: GradientRotation(-0.3),
+                            colors: [Color(0xff383A61), Color(0xff5B6482)],
+                          ),
+                          borderRadius: BorderRadius.circular(50.r),
+                          border:
+                              Border.all(color: Colors.black.withOpacity(0.5)),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.w, vertical: 10.h),
+                        child: Text(
+                          "MESSAGE US",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 11.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                      width: 10.w), // Replace Spacer with SizedBox for spacing
+
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => const CareCallScreen());
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            transform: GradientRotation(-0.3),
+                            colors: [Color(0xff383A61), Color(0xff5B6482)],
+                          ),
+                          borderRadius: BorderRadius.circular(50.r),
+                          border:
+                              Border.all(color: Colors.black.withOpacity(0.5)),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.w, vertical: 10.h),
+                        child: Text(
+                          "CALL US",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 11.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
-
-          SizedBox(height: 20.h),
+          SizedBox(height: 10.h),
           const Divider(
             color: Colors.blue,
+            thickness: 1,
           ),
-          SizedBox(height: 20.h),
-          //about us, terms and conditions, privacy policy, contact us, delete this account
+          SizedBox(height: 10.h),
           GestureDetector(
               onTap: () {
                 Get.to(() => AboutUsScreen());

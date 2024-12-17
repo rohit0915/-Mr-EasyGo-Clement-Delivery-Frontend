@@ -205,7 +205,7 @@ class _OrderItemWidgetState extends State<OrderItemWidget> {
                               ),
                             )),
                         onPressed: () {
-                          Get.to(() => const ChatScreen(title: "Chat Helper"));
+                          Get.to(() => const ChatScreen());
                         },
                         label: const Text(
                           "Chat",

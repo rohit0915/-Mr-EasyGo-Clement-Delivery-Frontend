@@ -230,7 +230,7 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.to(() => const ChatScreen(
-                title: "Testing",
+             
               ));
         },
         backgroundColor: Colors.white,

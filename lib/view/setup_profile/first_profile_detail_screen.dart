@@ -400,4 +400,5 @@ class _FirstProfileDetailScreenState extends State<FirstProfileDetailScreen> {
       },
     );
   }
+
 }

@@ -212,57 +212,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
               SizedBox(
                 height: 20.h,
               ),
-              Text(
-                "TYPE OF ADDRESS *".toUpperCase(),
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
-              ),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.r),
-                ),
-                margin: EdgeInsets.symmetric(vertical: 5.h),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      transform: GradientRotation(-0.3),
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Color(0xff2D3358), Color(0xff5C6486)],
-                    ),
-                  ),
-                  child: DropdownButton<String>(
-                    isExpanded: true,
-                    underline: Container(),
-                    icon: const Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.white,
-                    ),
-                    dropdownColor: const Color(0xff2F335A),
-                    hint: const Text(
-                      'Select one',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    value: _selectedItem,
-                    items: _items.map((String item) {
-                      return DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(
-                          item,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedItem = newValue;
-                      });
-                    },
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
               SizedBox(
                 width: double.infinity,
                 height: 40.h,
