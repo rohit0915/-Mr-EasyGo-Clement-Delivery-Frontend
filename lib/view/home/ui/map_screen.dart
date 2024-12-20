@@ -68,7 +68,7 @@ class _MapScreenState extends State<MapScreen> {
           )
         ],
       ),
-      drawer: const HomeDrawer(),
+      drawer: HomeDrawer(),
       key: homeController.scaffoldKey.value,
       body: SingleChildScrollView(
         child: Column(
@@ -81,7 +81,6 @@ class _MapScreenState extends State<MapScreen> {
                     ))
                   : SizedBox(
                       height: Get.height * 0.8,
-                      
                       child: FutureBuilder(
                         future:
                             rootBundle.loadString('assets/json/map_style.json'),

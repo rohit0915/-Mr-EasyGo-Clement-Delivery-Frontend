@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:muvit_driver/utility/constants.dart';
+import 'package:muvit_driver/view/home/withdraw_screen.dart';
 
 import '../../../controller/home_controller.dart';
 
@@ -77,28 +78,33 @@ class _WalletTabScreenState extends State<WalletTabScreen> {
                     SizedBox(
                       height: 10.h,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          children: [
-                            Icon(
-                              MdiIcons.download,
-                              color: Colors.white,
-                            ),
-                            SizedBox(
-                              height: 5.h,
-                            ),
-                            Text(
-                              "Withdraw",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        )
-                      ],
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(() => WithdrawScreen());
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            children: [
+                              Icon(
+                                MdiIcons.download,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                height: 5.h,
+                              ),
+                              Text(
+                                "Withdraw",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     )
                   ],
                 ),
@@ -127,13 +133,15 @@ class _WalletTabScreenState extends State<WalletTabScreen> {
                     height: 10.h,
                   ),
                   SizedBox(
-                    height: 69.h * 5,
+                    height: Get.height * 0.51,
                     width: Get.width,
                     child: ListView.builder(
                         shrinkWrap: true,
                         itemCount: 5,
                         itemBuilder: (context, index) {
                           return ListTile(
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 10.w, vertical: 10.h),
                             leading: Image.asset(
                               "assets/images/easy_go_logo.png",
                               color: Colors.blue,

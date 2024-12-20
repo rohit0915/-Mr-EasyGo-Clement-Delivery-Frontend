@@ -12,8 +12,11 @@ class HomeController extends GetxController {
 
   RxBool isBankAccountUploaded = false.obs;
   RxBool isHelper = false.obs;
+  RxBool isOnline = true.obs;
 
   RxBool isOnlyHelper = false.obs;
+
+  RxInt orderStart = 0.obs;
 
   Rx<GlobalKey<ScaffoldState>> scaffoldKey = GlobalKey<ScaffoldState>().obs;
 

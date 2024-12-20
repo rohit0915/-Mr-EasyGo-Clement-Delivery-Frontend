@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:muvit_driver/view/home/ui/cancelling_order_dialog.dart';
+import 'package:muvit_driver/view/track/track_order_screen.dart';
 
 import '../../../components/dashed_vertical_line.dart';
 import '../../../utility/constants.dart';
@@ -31,41 +33,46 @@ class RunningOrdersTabScreen extends StatelessWidget {
                           ? Column(
                               children: [
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        RichText(
+                                            text: TextSpan(children: [
+                                          TextSpan(
+                                              text: "21 Aug 2024: ",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.bold)),
+                                          TextSpan(
+                                              text: "16:00",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.bold)),
+                                        ])),
+                                        Text("4 Wheeler",
+                                            style: TextStyle(
+                                              color: Colors.grey.shade300,
+                                              fontSize: 12.sp,
+                                            )),
+                                      ],
+                                    ),
                                     RichText(
                                         text: TextSpan(children: [
                                       TextSpan(
-                                          text: "21 Aug 2024: ",
+                                          text: "Order No: ",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.bold)),
                                       TextSpan(
-                                          text: "16:00",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 10.sp)),
-                                    ])),
-                                    RichText(
-                                        text: TextSpan(children: [
-                                      TextSpan(
-                                          text: "Booking ID, ",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12.sp,
-                                              fontWeight: FontWeight.bold)),
-                                      TextSpan(
-                                          text: "123456",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 10.sp)),
-                                    ])),
-                                    RichText(
-                                        text: TextSpan(children: [
-                                      TextSpan(
-                                          text: "\$100",
+                                          text: "#2584",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 12.sp,
@@ -165,7 +172,9 @@ class RunningOrdersTabScreen extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: ElevatedButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Get.to(() => TrackOrderScreen());
+                                        },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: Colors.green,
                                           foregroundColor: Colors.white,
@@ -253,7 +262,7 @@ class RunningOrdersTabScreen extends StatelessWidget {
                                     Expanded(
                                       child: Text(
                                           "1901, Stockholm Bridge, Sweden",
-                                          style: TextStyle(fontSize: 12.sp)),
+                                          style: TextStyle(fontSize: 11.sp)),
                                     ),
                                   ],
                                 ),
@@ -476,23 +485,9 @@ class RunningOrdersTabScreen extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: ElevatedButton(
-                                        onPressed: () {},
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.red,
-                                          foregroundColor: Colors.white,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10.r))),
-                                        ),
-                                        child: Text("Reject"),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10.w,
-                                    ),
-                                    Expanded(
-                                      child: ElevatedButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Get.to(() => TrackOrderScreen());
+                                        },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: Colors.green,
                                           foregroundColor: Colors.white,
@@ -501,6 +496,24 @@ class RunningOrdersTabScreen extends StatelessWidget {
                                                   Radius.circular(10.r))),
                                         ),
                                         child: Text("Accept"),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10.w,
+                                    ),
+                                    Expanded(
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          cancelOrderDialog(context);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.red,
+                                          foregroundColor: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10.r))),
+                                        ),
+                                        child: Text("Reject"),
                                       ),
                                     ),
                                   ],
@@ -512,5 +525,9 @@ class RunningOrdersTabScreen extends StatelessWidget {
                 ),
               );
             }));
+  }
+
+  void cancelOrderDialog(BuildContext context) {
+    showDialog(context: context, builder: (context) => CancellingOrderDialog());
   }
 }

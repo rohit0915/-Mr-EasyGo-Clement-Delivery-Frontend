@@ -22,6 +22,7 @@ class _OrdersTabScreenState extends State<OrdersTabScreen> {
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: 3,
+        initialIndex: 1,
         child: Scaffold(
             appBar: AppBar(
               leading: Padding(
